@@ -1,0 +1,7 @@
+__pycache__/
+songs/output/
+songs/audios/
+songs/combined/
+songs/*.mp3
+.venv/
+pretrained_models/

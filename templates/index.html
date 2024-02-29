@@ -1,0 +1,138 @@
+<html>
+
+    <head>
+        <title>Song Spleeter</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+
+    <body>
+        <h1>Song Spleeter</h1>  
+                
+        <input type="text" name="fileToUpload" id="fileToUpload">
+        
+        <select id="format">
+            <option value="mp3">mp3</option>
+            <option value="wav">wav</option>
+        </select>
+        
+        <select id="stems">
+            <option value="2">2 stems</option>
+            <option value="4">4 stems</option>
+            <option value="5">5 stems</option>
+        </select>
+        
+        <button class = "buttons" onclick="pause_resume()">Pause / Resume</button>
+        <button class = "buttons" onclick="resetAudio()">Reset audios</button>
+        <button class = "buttons" onclick="combineSong()">Combine song</button>
+        <a class = "buttons" id = "combinedDownload" href="" download="combinedAudio.mp3" style="visibility: hidden;">Click combine if change volumes</a>
+        
+        
+        <select id="alreadySeparatedSongs">
+            <option>Select already separated songs</option>
+        </select>
+
+
+        <div id="separateDiv">
+            <button id = "separateButton" class = "buttons" onclick="separate()">Separate</button>
+            <div id = "separateLoader" class="loader" style="visibility: hidden;"></div>
+            <p id="separateLabel" style="visibility: hidden;"></p>
+
+        </div>
+
+
+        <div id="showAudioDiv">
+            <button class = "buttons" onclick="showAudio()">already Separated?</button>
+            <p id="isAlreadySeparated" style="visibility: hidden;"></p>
+        </div>
+
+
+        <div id="downloadDiv">
+            <button id = "downloadButton" class = "buttons" onclick="downloadSong()">Download</button>
+            <div id = "downloadLoader" class="loader" style="visibility: hidden;"></div>
+            <p id="isDownloaded" style="visibility: hidden;"></p>
+
+        </div>
+
+
+        <br><br>
+
+        <div id = "audiosDiv">
+            <div id="vocalsDiv" style="visibility: hidden;">
+                <p>Vocals</p>
+                <div class="volume-slider">
+                    <input type="range" min="0" max="1" step="0.05" value="1" id="volumeControlVocals">
+                    <div class="volume-label" id = "vocalsVolumeLabel">Volume 100%</div>
+                </div>
+                
+                <div id="vocalsAudioDiv">
+                    <audio id="vocalsAudio"></audio>
+                </div>          
+            </div>
+
+            <br>
+
+            <div id="drumsDiv" style="visibility: hidden;">
+                <p>Drums</p>
+                <div class="volume-slider">
+                    <input type="range" min="0" max="1" step="0.05" value="1" id="volumeControlDrums">
+                    <div class="volume-label" id = "drumsVolumeLabel">Volume 100%</div>
+                </div>
+
+                <div id="drumsAudioDiv">
+                    <audio id="drumsAudio"></audio>
+                </div>
+            </div>
+            
+            <br> 
+            
+            <div id="bassDiv" style="visibility: hidden;">
+                <p>Bass</p>
+                <div class="volume-slider">
+                    <input type="range" min="0" max="1" step="0.05" value="1" id="volumeControlBass">
+                    <div class="volume-label" id = "bassVolumeLabel">Volume 100%</div>
+                </div>
+
+                <div id="bassAudioDiv">
+                    <audio id="bassAudio"></audio>
+                </div>
+            </div>
+            
+            <br>
+            
+            <div id="otherDiv" style="visibility: hidden;"> 
+                <p>Other</p>
+                <div class="volume-slider">
+                    <input type="range" min="0" max="1" step="0.05" value="1" id="volumeControlOther">
+                    <div class="volume-label" id = "otherVolumeLabel">Volume 100%</div>
+                </div>
+
+                <div id="otherAudioDiv">
+                    <audio id="otherAudio"></audio>
+                </div>
+            </div>
+
+        </div>
+
+        <div id = "timeModulatorDiv">
+            <p id = "timeModulatorLabel" style="visibility: hidden;">Time Bar</p>
+            <input type="range" class="music-time-bar" min="0" max="300" step="1" value="0" id="timeModulatorSlider" style="width: 40% ; visibility: hidden;">
+
+        </div>
+
+        
+    </body>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/separator.js"></script>
+    <script src="../static/js/audioShower.js"></script>
+    <script src="../static/js/audioModulator.js"></script>
+    <script src="../static/js/vocalsListener.js"></script>
+    <script src="../static/js/drumsListener.js"></script>
+    <script src="../static/js/bassListener.js"></script>
+    <script src="../static/js/otherListener.js"></script>
+    <script src="../static/js/timeModulator.js"></script>
+    <script src="../static/js/songDownloader.js"></script>
+    <script src="../static/js/songCombiner.js"></script>
+    <script src="../static/js/audioPauseResume.js"></script>
+    <script src="../static/js/alreadySeparatedSongs.js"></script>
+</html>
