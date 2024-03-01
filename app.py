@@ -1,8 +1,18 @@
-from sre_parse import TYPE_FLAGS
-import flask, spleeter, audioManager, youtubeDownloader, likeComparison, audioCombiner, separatedSongList
-from flask import render_template, request
 import os
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
+from typing import Optional
+import spleeter
+import audioManager
+import youtubeDownloader
+import likeComparison
+import audioCombiner
+import separatedSongList
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 
 load_dotenv()
@@ -10,69 +20,65 @@ load_dotenv()
 SONG_DIR = os.getenv('SONG_DIR', "songs/audios")
 OUTPUT_DIR = os.getenv('OUTPUT_DIR', "songs/output")
 COMBINED_DIR = os.getenv('COMBINED_DIR', "songs/combined")
+PORT = int(os.getenv('PORT', 8000))
+
+if not os.path.exists(SONG_DIR):
+    os.makedirs(SONG_DIR)
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+
+if not os.path.exists(COMBINED_DIR):
+    os.makedirs(COMBINED_DIR)
 
 
-app = flask.Flask(__name__, template_folder='templates')
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
-@app.route('/')
-def home():
-   return render_template('index.html')
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-@app.route('/separate', methods=['POST'])
-def separate():
-    data = request.json
-
+@app.post('/separate')
+async def separate(data: dict):
     file = data.get('file')
     format = data.get('format')
     stems = data.get('stems')
     fileName = likeComparison.searchSongMatch(file, SONG_DIR)
-
     return spleeter.separate(fileName, format, stems, SONG_DIR, OUTPUT_DIR)
-    
 
+@app.get('/getAudioFiles')
+async def getAudioFiles(songName: str):
+    return audioManager.get_stems(songName, OUTPUT_DIR)
 
-@app.route('/getAudioFiles', methods=['GET'])
-def getAudioFiles():
-    songName = request.args.get('songName')
-    return audioManager.get_stems(songName, OUTPUT_DIR);
-
-
-@app.route('/getSingleAudio', methods=['GET'])
-def getSingleAudio():
-    song = request.args.get('songName')
-    songName = likeComparison.searchSongMatch(song, SONG_DIR)
-    instrument = request.args.get('instrument')
+@app.get('/getSingleAudio')
+async def getSingleAudio(songName: str, instrument: str):
+    songName = likeComparison.searchSongMatch(songName, SONG_DIR)
     return audioManager.get_audio(songName, instrument, OUTPUT_DIR)
 
-
-@app.route('/downloadSong', methods=['GET'])
-def downloadSong():
-    songName = request.args.get('songName')
+@app.get('/downloadSong')
+async def downloadSong(songName: str):
     return youtubeDownloader.downloadAudio(songName, SONG_DIR)
 
-
-@app.route('/combineSong', methods=['POST'])
-def combineSong():
-    songName = request.json.get('songName')
+@app.post('/combineSong')
+async def combineSong(songName: str, vocalsVolume: Optional[float] = None, drumsVolume: Optional[float] = None, bassVolume: Optional[float] = None, otherVolume: Optional[float] = None):
     songName = likeComparison.searchSongMatch(songName, SONG_DIR)
-    vocalsVolume = request.json.get('vocalsVolume')
-    drumsVolume = request.json.get('drumsVolume')
-    bassVolume = request.json.get('bassVolume')
-    otherVolume = request.json.get('otherVolume')
+    volumes = {'vocals': vocalsVolume, 'drums': drumsVolume, 'bass': bassVolume, 'other': otherVolume}
+    return audioCombiner.combineAudio(songName, volumes, COMBINED_DIR, OUTPUT_DIR)
 
-    return audioCombiner.combineAudio(songName, {'vocals': vocalsVolume, 'drums': drumsVolume, 'bass': bassVolume, 'other': otherVolume}, COMBINED_DIR, OUTPUT_DIR)
-
-
-@app.route('/getCombinedAudio', methods=['GET'])
-def getCombinedAudio():
-    songName = request.args.get('songName')
+@app.get('/getCombinedAudio')
+async def getCombinedAudio(songName: str):
     songName = likeComparison.searchSongMatch(songName, SONG_DIR)
     return audioManager.get_combined_audio(songName, COMBINED_DIR)
 
-
-@app.route('/getSeparatedSongsTitles', methods=['GET'])
-def getSeparatedSongsTitles():
+@app.get('/getSeparatedSongsTitles')
+async def getSeparatedSongsTitles():
     return separatedSongList.getSeparatedSongsTitles(OUTPUT_DIR)
 
+
+
+
 if __name__ == '__main__':
-   app.run()
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=PORT)

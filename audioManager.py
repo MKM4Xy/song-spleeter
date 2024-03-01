@@ -1,25 +1,20 @@
-import flask, spleeter, os
-from flask import render_template, request
-import json
+import os
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from typing import List
+from fastapi.responses import FileResponse
 
 
-def get_stems(songName, directory="songs/output/"):
+def get_stems(songName: str, directory: str = "songs/output/") -> JSONResponse:
     final_dir = os.path.join(directory, songName.replace(" ", "_"))
     stems = os.listdir(final_dir)
-    stemPaths = []
-    for stem in stems:
-        stemPaths.append(os.path.join(final_dir, stem))
+    stem_paths = [os.path.join(final_dir, stem) for stem in stems]
+    return JSONResponse(content={"stems": stem_paths})
 
-    return json.dumps({'stems': stemPaths}), 200, {'ContentType':'application/json'}
-
-
-def get_audio(songName, instrument, directory="songs/combined/"):
+def get_audio(songName: str, instrument: str, directory: str = "songs/combined/") -> str:
     final_dir = os.path.join(directory, songName.replace(" ", "_"))
-    return send_from_directory(os.path.join(final_dir), instrument + '.mp3')
+    return FileResponse(os.path.join(final_dir, f"{instrument}.mp3"))
 
-def get_combined_audio(songName, directory="songs/output/"):
+def get_combined_audio(songName: str, directory: str = "songs/output/") -> str:
     final_dir = os.path.join(directory, songName.replace(" ", "_"))
-    return send_from_directory(final_dir, 'combinedAudio.mp3')
-
-def send_from_directory(directory, filename):
-    return flask.send_from_directory(directory, filename)
+    return FileResponse(os.path.join(final_dir, "combinedAudio.mp3"))

@@ -402,3 +402,10 @@ select {
     width: 100%;
     height: 50px;
   }
+
+  #currentTimeLabel{
+    position: absolute;
+    text-align: left;
+    left : 71%;
+    top: 35%;
+  }

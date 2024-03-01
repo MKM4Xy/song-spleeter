@@ -4,4 +4,5 @@ songs/audios/
 songs/combined/
 songs/*.mp3
 .venv/
+imgs/
 pretrained_models/

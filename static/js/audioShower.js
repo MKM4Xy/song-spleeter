@@ -17,7 +17,7 @@ function showAudio() {
             setTimeout(function(){p.style.visibility = "hidden"}, 3000);
 
             var audio = document.getElementById('bassAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=bass";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=bass";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -26,7 +26,7 @@ function showAudio() {
 
 
             var audio = document.getElementById('drumsAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=drums";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=drums";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -36,7 +36,7 @@ function showAudio() {
 
             
             var audio = document.getElementById('otherAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=other";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=other";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -46,7 +46,7 @@ function showAudio() {
 
             
             var audio = document.getElementById('vocalsAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=vocals";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=vocals";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -54,8 +54,10 @@ function showAudio() {
             document.getElementById('vocalsAudioDiv').appendChild(audio);
             document.getElementById('vocalsDiv').style.visibility = "visible";
 
-            document.getElementById("timeModulatorLabel").style.visibility = "visible"
-            document.getElementById("timeModulatorSlider").style.visibility = "visible"
+            document.getElementById("timeModulatorLabel").style.visibility = "visible";
+            document.getElementById("timeModulatorSlider").style.visibility = "visible";
+            document.getElementById("currentTimeLabel").style.visibility = "visible";
+
             setTimeout(function(){setSliderTime()}, 1000);
 
         },
@@ -84,7 +86,7 @@ function showAudioBySelectedSong(selectedSong) {
             instrument: "vocals"
         },
         success: function() {
-            
+
             var p = document.getElementById("isAlreadySeparated");
             p.style.visibility = "visible";
             p.style.color = "green";
@@ -92,7 +94,7 @@ function showAudioBySelectedSong(selectedSong) {
             setTimeout(function(){p.style.visibility = "hidden"}, 3000);
 
             var audio = document.getElementById('bassAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=bass";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=bass";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -101,7 +103,7 @@ function showAudioBySelectedSong(selectedSong) {
 
 
             var audio = document.getElementById('drumsAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=drums";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=drums";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -111,7 +113,7 @@ function showAudioBySelectedSong(selectedSong) {
 
             
             var audio = document.getElementById('otherAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=other";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=other";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -121,7 +123,7 @@ function showAudioBySelectedSong(selectedSong) {
 
             
             var audio = document.getElementById('vocalsAudio');
-            audio.src = "http://127.0.0.1:5000/getSingleAudio?songName=" + file + "&instrument=vocals";
+            audio.src = "/getSingleAudio?songName=" + file + "&instrument=vocals";
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;

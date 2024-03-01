@@ -1,0 +1,5 @@
+spleeter
+fastapi
+uvicorn
+pytube
+fuzzywuzzy

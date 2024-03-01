@@ -22,7 +22,6 @@ time.addEventListener("input", function() {
 function setSliderTime() {
     songLength = document.getElementById('vocalsAudio').duration;
     document.getElementById("timeModulatorSlider").max = songLength;
-    //document.getElementById("timeModulatorSlider").style.width = songLength + "px";
 
 }
 
@@ -37,5 +36,17 @@ var vocalsAudio = document.getElementById('vocalsAudio');
 
 vocalsAudio.addEventListener("timeupdate", function() {
     setCurrentTime(vocalsAudio.currentTime);
-
+    document.getElementById("currentTimeLabel").innerHTML = formatTime(vocalsAudio.currentTime);
 });
+
+
+function formatTime(timeInSeconds) {
+    var minutes = Math.floor(timeInSeconds / 60);
+    var seconds = Math.floor(timeInSeconds % 60);
+    return pad(minutes) + ":" + pad(seconds);
+}
+
+
+function pad(number) {
+    return (number < 10) ? "0" + number : number;
+}
