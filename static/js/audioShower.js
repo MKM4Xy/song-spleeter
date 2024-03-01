@@ -86,6 +86,12 @@ function showAudioBySelectedSong(selectedSong) {
             instrument: "vocals"
         },
         success: function() {
+            /* if(file == "faccetta nera"){
+                document.getElementById("duce").style.visibility = "visible";
+        
+            }else{
+                document.getElementById("duce").style.visibility = "hidden";
+            } */
 
             var p = document.getElementById("isAlreadySeparated");
             p.style.visibility = "visible";

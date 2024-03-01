@@ -10,9 +10,10 @@ import likeComparison
 import audioCombiner
 import separatedSongList
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+import imgManager
 
 
 load_dotenv()
@@ -62,7 +63,14 @@ async def downloadSong(songName: str):
     return youtubeDownloader.downloadAudio(songName, SONG_DIR)
 
 @app.post('/combineSong')
-async def combineSong(songName: str, vocalsVolume: Optional[float] = None, drumsVolume: Optional[float] = None, bassVolume: Optional[float] = None, otherVolume: Optional[float] = None):
+async def combineSong(request : Request):
+    data = await request.json()
+    songName = data.get('songName')
+    vocalsVolume = data.get('vocalsVolume')
+    drumsVolume = data.get('drumsVolume')
+    bassVolume = data.get('bassVolume')
+    otherVolume = data.get('otherVolume')
+
     songName = likeComparison.searchSongMatch(songName, SONG_DIR)
     volumes = {'vocals': vocalsVolume, 'drums': drumsVolume, 'bass': bassVolume, 'other': otherVolume}
     return audioCombiner.combineAudio(songName, volumes, COMBINED_DIR, OUTPUT_DIR)
@@ -75,6 +83,19 @@ async def getCombinedAudio(songName: str):
 @app.get('/getSeparatedSongsTitles')
 async def getSeparatedSongsTitles():
     return separatedSongList.getSeparatedSongsTitles(OUTPUT_DIR)
+
+@app.get('/getImgFromName')
+def getImg(data):
+    img = data.get('imgName')
+    return imgManager.getImgFromName(img)
+
+@app.get('/favicon.ico')
+def favicon():
+    return FileResponse('static/favicon.ico')
+
+""" @app.get('/getBenito')
+def getBenito():
+    return FileResponse('imgs/benito.png') """
 
 
 

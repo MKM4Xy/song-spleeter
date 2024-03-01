@@ -3,3 +3,4 @@ fastapi
 uvicorn
 pytube
 fuzzywuzzy
+python-dotenv
