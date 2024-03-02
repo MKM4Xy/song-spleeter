@@ -9,17 +9,6 @@ function resetAudio() {
     audio.currentTime = 0;
 }
 
-/* var volumeControl = document.getElementById("volumeControl");
-volumeControl.addEventListener("input", function() {
-    var volume = parseFloat(volumeControl.value);
-    updateVolume(volume);
-});
-
-function updateVolume(volume) {
-    var audio = document.getElementById('vocalsAudio');
-        audio.volume = volume;
-} */
-
 
 function updateVolume(id, volume) {
     var audio = document.getElementById(id);
@@ -28,4 +17,29 @@ function updateVolume(id, volume) {
     var label = document.getElementById(splitName + "VolumeLabel");
     label.innerHTML = "Volume: " + (volume * 100).toFixed(0) + "%";
     
+}
+
+
+function syncAudio() {
+    currentTimes = [];
+    var audio = document.getElementById('bassAudio');
+    currentTimes.push(audio.currentTime);
+    var audio = document.getElementById('drumsAudio');
+    currentTimes.push(audio.currentTime);
+    var audio = document.getElementById('otherAudio');
+    currentTimes.push(audio.currentTime);
+    var audio = document.getElementById('vocalsAudio');
+    currentTimes.push(audio.currentTime);
+
+    var minTime = Math.min.apply(Math, currentTimes);
+
+    var audio = document.getElementById('bassAudio');
+    audio.currentTime = minTime;
+    var audio = document.getElementById('drumsAudio');
+    audio.currentTime = minTime;
+    var audio = document.getElementById('otherAudio');
+    audio.currentTime = minTime;
+    var audio = document.getElementById('vocalsAudio');
+    audio.currentTime = minTime;
+
 }

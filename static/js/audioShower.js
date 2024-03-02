@@ -17,7 +17,9 @@ function showAudio() {
             setTimeout(function(){p.style.visibility = "hidden"}, 3000);
 
             var audio = document.getElementById('bassAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=bass";
+            var link = "/getSingleAudio?songName=" + file + "&instrument=bass";
+            audio.src = link;
+            loadWaveform(link, "bassWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -26,7 +28,9 @@ function showAudio() {
 
 
             var audio = document.getElementById('drumsAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=drums";
+            var link = "/getSingleAudio?songName=" + file + "&instrument=drums";
+            audio.src = link;
+            loadWaveform(link, "drumsWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -36,7 +40,9 @@ function showAudio() {
 
             
             var audio = document.getElementById('otherAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=other";
+            var link = "/getSingleAudio?songName=" + file + "&instrument=other";
+            audio.src = link;
+            loadWaveform(link, "otherWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -46,7 +52,9 @@ function showAudio() {
 
             
             var audio = document.getElementById('vocalsAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=vocals";
+            var link = "/getSingleAudio?songName=" + file + "&instrument=vocals";
+            audio.src = link;
+            loadWaveform(link, "vocalsWaveForm"); 
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -100,7 +108,9 @@ function showAudioBySelectedSong(selectedSong) {
             setTimeout(function(){p.style.visibility = "hidden"}, 3000);
 
             var audio = document.getElementById('bassAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=bass";
+            var link = "/getSingleAudio?songName=" + file + "&instrument=bass";
+            audio.src = link;
+            loadWaveform(link, "bassWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -109,7 +119,9 @@ function showAudioBySelectedSong(selectedSong) {
 
 
             var audio = document.getElementById('drumsAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=drums";
+            link = "/getSingleAudio?songName=" + file + "&instrument=drums";
+            audio.src = link;
+            loadWaveform(link, "drumsWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -119,7 +131,9 @@ function showAudioBySelectedSong(selectedSong) {
 
             
             var audio = document.getElementById('otherAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=other";
+            link = "/getSingleAudio?songName=" + file + "&instrument=other";
+            audio.src = link;
+            loadWaveform(link, "otherWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -129,7 +143,9 @@ function showAudioBySelectedSong(selectedSong) {
 
             
             var audio = document.getElementById('vocalsAudio');
-            audio.src = "/getSingleAudio?songName=" + file + "&instrument=vocals";
+            link = "/getSingleAudio?songName=" + file + "&instrument=vocals";
+            audio.src = link;
+            loadWaveform(link, "vocalsWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;

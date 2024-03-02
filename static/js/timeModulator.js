@@ -25,9 +25,17 @@ function setSliderTime() {
 
 }
 
-function setCurrentTime(currentTime){
+function setCurrentTime(currentTime, waves){
     time = document.getElementById("timeModulatorSlider");
     time.value = currentTime;
+    var wave = waves['vocalsWaveForm'];
+    wave.setTime(currentTime);
+    wave = waves['bassWaveForm'];
+    wave.setTime(currentTime);
+    wave = waves['drumsWaveForm'];
+    wave.setTime(currentTime);
+    wave = waves['otherWaveForm'];
+    wave.setTime(currentTime);
 
 }
 
@@ -35,7 +43,7 @@ function setCurrentTime(currentTime){
 var vocalsAudio = document.getElementById('vocalsAudio');
 
 vocalsAudio.addEventListener("timeupdate", function() {
-    setCurrentTime(vocalsAudio.currentTime);
+    setCurrentTime(vocalsAudio.currentTime, waveSurfers);
     document.getElementById("currentTimeLabel").innerHTML = formatTime(vocalsAudio.currentTime);
 });
 

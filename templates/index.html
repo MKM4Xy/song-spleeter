@@ -16,16 +16,16 @@
         </select>
         
         <select id="stems">
-            <option value="2">2 stems</option>
+            <option value="2">2 stems (NotImpl)</option>
             <option value="4">4 stems</option>
-            <option value="5">5 stems</option>
+            <option value="5">5 stems (NotImpl)</option>
         </select>
         
         <button class = "buttons" onclick="pause_resume()">Pause / Resume</button>
         <button class = "buttons" onclick="resetAudio()">Reset audios</button>
+        <button class = "buttons" onclick="syncAudio()">Sync?</button>
         <button class = "buttons" onclick="combineSong()">Combine song</button>
-        <a class = "buttons" id = "combinedDownload" href="" download="combinedAudio.mp3" style="visibility: hidden;">Click combine if change volumes</a>
-        
+        <a class = "buttons" id = "combinedDownload" href="" download="combinedAudio.mp3" style="visibility: hidden;">Download combined Audio</a>
         
         <select id="alreadySeparatedSongs">
             <option>Select already separated songs</option>
@@ -66,6 +66,7 @@
                 
                 <div id="vocalsAudioDiv">
                     <audio id="vocalsAudio"></audio>
+                    <div id = "vocalsWaveForm"></div>
                 </div>          
             </div>
 
@@ -80,6 +81,7 @@
 
                 <div id="drumsAudioDiv">
                     <audio id="drumsAudio"></audio>
+                    <div id = "drumsWaveForm"></div>
                 </div>
             </div>
             
@@ -94,6 +96,7 @@
 
                 <div id="bassAudioDiv">
                     <audio id="bassAudio"></audio>
+                    <div id = "bassWaveForm"></div>
                 </div>
             </div>
             
@@ -108,6 +111,7 @@
 
                 <div id="otherAudioDiv">
                     <audio id="otherAudio"></audio>
+                    <div id = "otherWaveForm"></div>
                 </div>
             </div>
 
@@ -136,4 +140,7 @@
     <script src="../static/js/songCombiner.js"></script>
     <script src="../static/js/audioPauseResume.js"></script>
     <script src="../static/js/alreadySeparatedSongs.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script src="../static/js/waveManager.js"></script>
+
 </html>
