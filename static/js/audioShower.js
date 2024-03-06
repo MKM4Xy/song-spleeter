@@ -9,13 +9,6 @@ function showAudio() {
             instrument: "vocals"
         },
         success: function() {
-            
-            var p = document.getElementById("isAlreadySeparated");
-            p.style.visibility = "visible";
-            p.style.color = "green";
-            p.innerHTML = "Enjoy the song!";
-            setTimeout(function(){p.style.visibility = "hidden"}, 3000);
-
             var audio = document.getElementById('bassAudio');
             var link = "/getSingleAudio?songName=" + file + "&instrument=bass";
             audio.src = link;
@@ -28,7 +21,7 @@ function showAudio() {
 
 
             var audio = document.getElementById('drumsAudio');
-            var link = "/getSingleAudio?songName=" + file + "&instrument=drums";
+            link = "/getSingleAudio?songName=" + file + "&instrument=drums";
             audio.src = link;
             loadWaveform(link, "drumsWaveForm");
             audio.type = "audio/" + format;
@@ -40,7 +33,7 @@ function showAudio() {
 
             
             var audio = document.getElementById('otherAudio');
-            var link = "/getSingleAudio?songName=" + file + "&instrument=other";
+            link = "/getSingleAudio?songName=" + file + "&instrument=other";
             audio.src = link;
             loadWaveform(link, "otherWaveForm");
             audio.type = "audio/" + format;
@@ -52,9 +45,9 @@ function showAudio() {
 
             
             var audio = document.getElementById('vocalsAudio');
-            var link = "/getSingleAudio?songName=" + file + "&instrument=vocals";
+            link = "/getSingleAudio?songName=" + file + "&instrument=vocals";
             audio.src = link;
-            loadWaveform(link, "vocalsWaveForm"); 
+            loadWaveform(link, "vocalsWaveForm");
             audio.type = "audio/" + format;
             audio.controls = false;
             audio.autoplay = true;
@@ -62,20 +55,19 @@ function showAudio() {
             document.getElementById('vocalsAudioDiv').appendChild(audio);
             document.getElementById('vocalsDiv').style.visibility = "visible";
 
-            document.getElementById("timeModulatorLabel").style.visibility = "visible";
-            document.getElementById("timeModulatorSlider").style.visibility = "visible";
-            document.getElementById("currentTimeLabel").style.visibility = "visible";
-
+            document.getElementById("timeModulatorLabel").style.visibility = "visible"
+            document.getElementById("timeModulatorSlider").style.visibility = "visible"
             setTimeout(function(){setSliderTime()}, 1000);
 
+            document.getElementById("pauseResume").style.visibility = "visible";
+            document.getElementById("syncAudio").style.visibility = "visible";
+            document.getElementById("combineSong").style.visibility = "visible";
+            document.getElementById("combinedDownload").style.visibility = "visible";
+            
         },
 
         error: function () {
-            var p = document.getElementById("isAlreadySeparated");
-            p.style.visibility = "visible";
-            p.style.color = "red";
-            p.innerHTML = "Song has not been separated yet, please separate the song first.";
-            setTimeout(function(){p.style.visibility = "hidden"}, 3000);
+           
         }
         
      });
@@ -94,18 +86,6 @@ function showAudioBySelectedSong(selectedSong) {
             instrument: "vocals"
         },
         success: function() {
-            /* if(file == "faccetta nera"){
-                document.getElementById("duce").style.visibility = "visible";
-        
-            }else{
-                document.getElementById("duce").style.visibility = "hidden";
-            } */
-
-            var p = document.getElementById("isAlreadySeparated");
-            p.style.visibility = "visible";
-            p.style.color = "green";
-            p.innerHTML = "Enjoy the song!";
-            setTimeout(function(){p.style.visibility = "hidden"}, 3000);
 
             var audio = document.getElementById('bassAudio');
             var link = "/getSingleAudio?songName=" + file + "&instrument=bass";
@@ -157,14 +137,15 @@ function showAudioBySelectedSong(selectedSong) {
             document.getElementById("timeModulatorSlider").style.visibility = "visible"
             setTimeout(function(){setSliderTime()}, 1000);
 
+            document.getElementById("pauseResume").style.visibility = "visible";
+            document.getElementById("syncAudio").style.visibility = "visible";
+            document.getElementById("combineSong").style.visibility = "visible";
+            document.getElementById("combinedDownload").style.visibility = "visible";
+
         },
 
         error: function () {
-            var p = document.getElementById("isAlreadySeparated");
-            p.style.visibility = "visible";
-            p.style.color = "red";
-            p.innerHTML = "Song has not been separated yet, please separate the song first.";
-            setTimeout(function(){p.style.visibility = "hidden"}, 3000);
+           
         }
         
      });

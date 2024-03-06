@@ -1,3 +1,4 @@
+import json
 import os
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
@@ -10,7 +11,7 @@ import likeComparison
 import audioCombiner
 import separatedSongList
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import imgManager
@@ -46,6 +47,9 @@ async def separate(data: dict):
     file = data.get('file')
     format = data.get('format')
     stems = data.get('stems')
+    if(file == None or format == None or stems == None):
+        return JSONResponse(status_code=400, content={"error": "Invalid content"})
+    
     fileName = likeComparison.searchSongMatch(file, SONG_DIR)
     return spleeter.separate(fileName, format, stems, SONG_DIR, OUTPUT_DIR)
 
@@ -60,7 +64,11 @@ async def getSingleAudio(songName: str, instrument: str):
 
 @app.get('/downloadSong')
 async def downloadSong(songName: str):
-    return youtubeDownloader.downloadAudio(songName, SONG_DIR)
+    if likeComparison.searchSongMatch(songName, SONG_DIR) == None:
+        return youtubeDownloader.downloadAudio(songName, SONG_DIR)
+    
+    else:
+        return JSONResponse(status_code=418, content={"error": "Song has already been downloaded"})
 
 @app.post('/combineSong')
 async def combineSong(request : Request):

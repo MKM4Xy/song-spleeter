@@ -1,170 +1,170 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    overflow-x: hidden;
+/* body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f0f0f0;
+overflow-x: hidden;
 
 }
 
 h1 {
-    text-align: left;
-    color: #333;
+text-align: left;
+color: #333;
 }
 
 input[type="text"],
 select {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+padding: 10px;
+margin: 5px;
+border: 1px solid #ccc;
+border-radius: 5px;
 }
 
 .buttons {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
+padding: 10px 20px;
+margin: 5px;
+border: none;
+border-radius: 5px;
+background-color: #4CAF50;
+color: white;
+cursor: pointer;
+font-size: 16px;
 }
 
 .buttons:hover {
-    background-color: #45a049;
+background-color: #45a049;
 }
 
 #showAudioDiv {
-    position: relative;
-    text-align: left;
-    width: 100%;
-    height: 50px;
+position: relative;
+text-align: left;
+width: 100%;
+height: 50px;
 }
 
 #isAlreadySeparated{
-    position: absolute;
-    text-align: left;
-    left : 13%;
-    top: 0%;
+position: absolute;
+text-align: left;
+left : 13%;
+top: 0%;
 }
 
 #downloadDiv {
-    position: relative;
-    text-align: left;
-    width: 100%;
-    height: 50px;
+position: relative;
+text-align: left;
+width: 100%;
+height: 50px;
 }
 
 #isDownloaded{
-    position: absolute;
-    text-align: left;
-    left : 8%;
-    top: 0%;
+position: absolute;
+text-align: left;
+left : 8%;
+top: 0%;
 }
 
 .volume-slider {
-    width: 60%;
-    margin: 0 auto;
+width: 60%;
+margin: 0 auto;
 }
 
 .volume-slider input[type="range"] {
-    width: 100%;
+width: 100%;
 }
 
 .volume-label {
-    text-align: center;
-    margin-top: 5px;
+text-align: center;
+margin-top: 5px;
 }
 
 #audiosDiv {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto; 
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
-    margin-top: -3%;
-    left: 0%;
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto; 
+gap: 30px;
+justify-content: center;
+align-items: center;
+margin-top: -3%;
+left: 0%;
 }
 
 #vocalsDiv {
-    grid-column: 1 / span 1; 
-    grid-row: 1 / span 1;
-    text-align: center;
+grid-column: 1 / span 1; 
+grid-row: 1 / span 1;
+text-align: center;
 }
 
 #drumsDiv {
-    grid-column: 1 / span 1; 
-    grid-row: 2 / span 1; 
-    text-align: center;
+grid-column: 1 / span 1; 
+grid-row: 2 / span 1; 
+text-align: center;
 
 }
 
 #bassDiv {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
-    text-align: center;
+grid-column: 2 / span 1;
+grid-row: 1 / span 1;
+text-align: center;
 
 }
 
 #otherDiv {
-    grid-column: 2 / span 1;
-    grid-row: 2 / span 1; 
-    text-align: center;
+grid-column: 2 / span 1;
+grid-row: 2 / span 1; 
+text-align: center;
 
 }
 
 
 @media screen and (max-width: 768px) {
-    #vocalsAudioDiv,
-    #drumsAudioDiv,
-    #bassAudioDiv,
-    #otherAudioDiv {
-        width: 100%;
-    }
+#vocalsAudioDiv,
+#drumsAudioDiv,
+#bassAudioDiv,
+#otherAudioDiv {
+    width: 100%;
+}
 }
 
 
 .loader {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #4CAF50;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite; 
-    margin: 20px auto;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
+border: 4px solid rgba(0, 0, 0, 0.1);
+border-left: 4px solid #4CAF50;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+animation: spin 1s linear infinite; 
+margin: 20px auto;
+}
 
-  #separateLabel{
-    position: absolute;
-    text-align: left;
-    left : 8%;
-    top: 14.5%;
+@keyframes spin {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+
+
+#separateLabel{
+position: absolute;
+text-align: left;
+left : 8%;
+top: 14.5%;
 }
 
 #separateLoader {
-    position: absolute;
-    left : 8%;
-    top: 13.5%;
+position: absolute;
+left : 8%;
+top: 13.5%;
 
 }
 
 #downloadLoader {
-    position: absolute;
-    left : 8.5%;
-    top: -17.5%;
-    
+position: absolute;
+left : 8.5%;
+top: -17.5%;
+
 }
 
 #timeModulatorDiv{
@@ -182,29 +182,283 @@ top: 35%;
 }
 
 #vocalsWaveForm{
+position: relative;
+left : 18%;
+top: 2%;
+width: 80%;
+}
+
+#drumsWaveForm{
+position: relative;
+left : 18%;
+top: 2%;
+width: 80%;
+}
+
+#bassWaveForm{
+position: relative;
+left : 18%;
+top: 2%;
+width: 80%;
+}
+
+#otherWaveForm{
+position: relative;
+left : 18%;
+top: 2%;
+width: 80%;
+} */
+
+
+
+
+
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    overflow-x: hidden;
+
+}
+
+.buttons {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.buttons:hover {
+    background-color: #45a049;
+}
+
+@media screen and (max-width: 768px) {
+    #vocalsAudioDiv,
+    #drumsAudioDiv,
+    #bassAudioDiv,
+    #otherAudioDiv {
+        width: 100%;
+    }
+}
+
+.inputs{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.loader {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #4CAF50;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite; 
+    margin: 10px auto;
+}
+
+.volume-slider {
+    width: 60%;
+    margin: 0 auto;
+    }
+    
+    .volume-slider input[type="range"] {
+    width: 100%;
+    }
+    
+    .volume-label {
+    text-align: center;
+    margin-top: 5px;
+    }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#titleDiv{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#inputSpleeterDiv{
+    position: absolute;
+    display: flex;
+    width: 40%;
+    margin-top: 20px;
+    height: 40px;
+
+}
+
+#alreadySeparatedSongsDiv{
+    position: absolute;
+    display: flex;
+    width: 40%;
+    margin-top: 20px;
+    margin-left: 450px;
+    height: 15%;
+}
+
+#separateDiv{
+    position: absolute;
+    width: 100%;
+    margin-top: 50px;
+    height: 100%;
+
+}
+
+#separateButton{
+    width: 110px;
+}
+#separateLoader {
+    position: absolute;
+    left: 20%;
+    top: 0%;
+}
+
+#separateLabel{
+    position: absolute;
+    top: 0%;
+    left: 20%;
+}
+
+#downloadDiv{
+    position: absolute;
+    width: 100%;
+    margin-top: 100px;
+    height: 100%;
+}
+
+#downloadLoader {
+    position: absolute;
+    left: 20%;
+    top: 0%;
+}
+
+#isDownloaded{
+    position: absolute;
+    top: 0%;
+    left: 20%;
+}
+
+#audiosDiv {
+    position: absolute;
+    display: grid;
+    width: 100%;
+    height: 400px;
+    margin-top: 110px;
+    left: 0%;
+
+    grid-template-columns: 40% 20% 40%;
+    grid-template-rows: 50% 0% 50% ; 
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#vocalsDiv {
+    grid-column: 1 / span 1; 
+    grid-row: 1 / span 1;
+    text-align: center;
+}
+    
+#drumsDiv {
+    grid-column: 1 / span 1; 
+    grid-row: 3 / span 1; 
+    text-align: center;
+
+}
+
+#pauseResume, #syncAudio{
+    grid-column: 2 / span 1; 
+    grid-row: 1 / span 1; 
+    text-align: top;
+
+}
+
+#syncAudio{
+    margin-top: 120px;
+}
+    
+#combineSong, #combinedDownload{
+    grid-column: 2 / span 1; 
+    grid-row: 3 / span 1; 
+    text-align: top;
+
+}
+
+#combinedDownload{
+    margin-top: 120px;
+    text-align: center;
+
+}
+
+#bassDiv {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+    text-align: center;
+
+}
+
+#otherDiv {
+    grid-column: 3 / span 1;
+    grid-row: 3 / span 1; 
+    text-align: center;
+
+}
+
+#timeModulatorDiv{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 530px;
+}
+    
+#currentTimeLabel{
+    position: absolute;
+    text-align: left;
+    left : 71%;
+    top: 71%;
+}
+    
+#vocalsWaveForm{
     position: relative;
     left : 18%;
     top: 2%;
     width: 80%;
 }
-
+    
 #drumsWaveForm{
     position: relative;
     left : 18%;
     top: 2%;
     width: 80%;
 }
-
+    
 #bassWaveForm{
     position: relative;
     left : 18%;
     top: 2%;
     width: 80%;
 }
-
+    
 #otherWaveForm{
     position: relative;
     left : 18%;
     top: 2%;
     width: 80%;
 }
+

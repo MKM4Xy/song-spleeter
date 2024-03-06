@@ -1,12 +1,10 @@
-import json, likeComparison
+import likeComparison
+
+from fastapi.responses import JSONResponse
 from pytube import Search, YouTube
 
 def downloadAudio(title, directory="songs"):
-
-    match = likeComparison.searchSongMatch(title)
-
-    if(match == None):
-
+    if title != None:
         if title.startswith("https") or title.startswith("http:"):
             try:
                 print("Downloading audio: " + title)
@@ -17,11 +15,11 @@ def downloadAudio(title, directory="songs"):
                 stream.download(output_path=directory, filename=f"{song_title}.mp3")
 
                 print("Download complete")
-                return json.dumps({'success': True, 'result': "ok"}), 200
+                return JSONResponse(status_code=200, content={"success": "ok"})
             
             except Exception as e:
                 print(f"Error: {e}")
-                return json.dumps({'success': False, 'error': "Song has not been downloaded"}), 400
+                return JSONResponse(status_code=400, content={"error": "Song has not been downloaded"})
 
         try:
             print("Downloading audio: " + title)
@@ -37,12 +35,12 @@ def downloadAudio(title, directory="songs"):
             stream.download(output_path=directory, filename= song_title + ".mp3")
 
             print("Download complete")
-            return json.dumps({'success': True, 'result': "ok"}), 200
+            return JSONResponse(status_code=200, content={"success": "ok"})
             
         except Exception as e:
             print(f"Error: {e}")
-            return json.dumps({'success': False, 'error': "Song has not been downloaded"}), 400
+            return JSONResponse(status_code=400, content={"error": "Song has not been downloaded"})
 
 
     else:
-        return json.dumps({'success': False, 'error': "Song already downloaded"}), 418
+        return JSONResponse(status_code=400, content={"error": "Invalid song name"})
