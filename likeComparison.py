@@ -12,7 +12,7 @@ def searchSongMatch(songName, directory="songs"):
     if len(songNames) == 0:
         return None
 
-    match, score = process.extractOne(songName.replace(" ", "_"), songNames)
+    match, score = process.extractOne(songName.replace(" ", "_").replace(".", "_"), songNames)
     if score >= 80:  
         return match.split('.')[0]
     else:

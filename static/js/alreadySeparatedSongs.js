@@ -35,6 +35,7 @@ function putAudioInOption(songName){
 
 dropMenu.addEventListener("change", function(){
     var selectedSong = dropMenu.options[dropMenu.selectedIndex].text;
+    console.log(selectedSong);
     if(selectedSong != "Select already separated songs"){
         showAudioBySelectedSong(selectedSong);
     

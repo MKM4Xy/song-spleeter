@@ -42,3 +42,35 @@ function combineSong() {
         }
     });
 }
+
+
+function combineUserSongs(){
+    var selectedFiles = new FormData();
+    var fileInput = document.getElementById("uploadUser1");
+    selectedFiles.append('audio1', fileInput.files[0]);
+    var fileInput = document.getElementById("uploadUser2");
+    selectedFiles.append('audio2', fileInput.files[0]);
+    var fileInput = document.getElementById("uploadUser3");
+    selectedFiles.append('audio3', fileInput.files[0]);
+    var fileInput = document.getElementById("uploadUser4");
+    selectedFiles.append('audio4', fileInput.files[0]);
+
+
+    $.ajax({
+        url: '/combineSongFromUpload',
+        type: 'POST',
+        data: selectedFiles,
+        contentType: false,
+        processData: false,
+
+        success: function() {
+            document.getElementById("downloadUserCombined").style.visibility = 'visible';
+            document.getElementById("downloadUserCombined").href = "/getCombinedAudioFromUpload";
+
+        },
+        error: function(error) {
+            console.error('Error:', error);
+        }
+    });
+
+}

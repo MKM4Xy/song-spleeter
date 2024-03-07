@@ -6,6 +6,6 @@ def getSeparatedSongsTitles(directory="songs/output/"):
     for dir in os.listdir(directory):
         dir_path = os.path.join(directory, dir)
         if os.path.isdir(dir_path):
-            dirNames.append(dir.replace("_", " "))
+            dirNames.append(dir.replace("_", " ").replace(".", " "))
 
     return dirNames 

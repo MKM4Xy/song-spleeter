@@ -50,3 +50,12 @@ download.addEventListener("click", function() {
     loader.style.visibility = "visible";
 
 });
+
+
+var combinedDownload = document.getElementById("combinedDownload");
+
+combinedDownload.addEventListener("click", function() {
+    console.log("Click click");
+    setTimeout(function(){combinedDownload.style.visibility = "hidden"}, 2000);
+    
+});

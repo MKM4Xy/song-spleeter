@@ -1,15 +1,10 @@
 import json
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from typing import Optional
-import spleeter
-import audioManager
-import youtubeDownloader
-import likeComparison
-import audioCombiner
-import separatedSongList
+import spleeter, audioManager, youtubeDownloader, likeComparison, separatedSongList, audioCombiner
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -23,6 +18,8 @@ SONG_DIR = os.getenv('SONG_DIR', "songs/audios")
 OUTPUT_DIR = os.getenv('OUTPUT_DIR', "songs/output")
 COMBINED_DIR = os.getenv('COMBINED_DIR', "songs/combined")
 PORT = int(os.getenv('PORT', 8000))
+UPLOAD_DIR = os.getenv('UPLOAD_DIR', "uploads")
+COMBINED_UPLOAD_DIR = os.getenv('COMBINED_UPLOAD_DIR', "uploads/combined")
 
 if not os.path.exists(SONG_DIR):
     os.makedirs(SONG_DIR)
@@ -32,6 +29,12 @@ if not os.path.exists(OUTPUT_DIR):
 
 if not os.path.exists(COMBINED_DIR):
     os.makedirs(COMBINED_DIR)
+
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
+
+if not os.path.exists(COMBINED_UPLOAD_DIR):
+    os.makedirs(COMBINED_UPLOAD_DIR)
 
 
 app = FastAPI()
@@ -83,10 +86,36 @@ async def combineSong(request : Request):
     volumes = {'vocals': vocalsVolume, 'drums': drumsVolume, 'bass': bassVolume, 'other': otherVolume}
     return audioCombiner.combineAudio(songName, volumes, COMBINED_DIR, OUTPUT_DIR)
 
+@app.post('/combineSongFromUpload')
+async def combineSong(audio1: UploadFile = File(...), audio2: UploadFile = File(...), audio3: UploadFile = File(...), audio4: UploadFile = File(...)):
+
+    audio1_content = await audio1.read()
+    audio2_content = await audio2.read()
+    audio3_content = await audio3.read()
+    audio4_content = await audio4.read()
+    
+    with open(os.path.join(UPLOAD_DIR, "audio1.mp3"), "wb") as f:
+        f.write(audio1_content)
+    with open(os.path.join(UPLOAD_DIR, "audio2.mp3"), "wb") as f:
+        f.write(audio2_content)
+    with open(os.path.join(UPLOAD_DIR, "audio3.mp3"), "wb") as f:
+        f.write(audio3_content)
+    with open(os.path.join(UPLOAD_DIR, "audio4.mp3"), "wb") as f:
+        f.write(audio4_content)
+
+    audios = ["audio1", "audio2", "audio3", "audio4"]
+
+    return audioCombiner.combineAudioFromUpload(audios, COMBINED_UPLOAD_DIR, UPLOAD_DIR)
+
+
 @app.get('/getCombinedAudio')
 async def getCombinedAudio(songName: str):
     songName = likeComparison.searchSongMatch(songName, SONG_DIR)
     return audioManager.get_combined_audio(songName, COMBINED_DIR)
+
+@app.get('/getCombinedAudioFromUpload')
+async def getCombinedAudioFromUpload():
+    return audioManager.get_combined_audio_from_upload(COMBINED_UPLOAD_DIR)
 
 @app.get('/getSeparatedSongsTitles')
 async def getSeparatedSongsTitles():
@@ -101,9 +130,7 @@ def getImg(data):
 def favicon():
     return FileResponse('static/favicon.ico')
 
-""" @app.get('/getBenito')
-def getBenito():
-    return FileResponse('imgs/benito.png') """
+
 
 
 

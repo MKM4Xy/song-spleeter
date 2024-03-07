@@ -62,7 +62,6 @@ function showAudio() {
             document.getElementById("pauseResume").style.visibility = "visible";
             document.getElementById("syncAudio").style.visibility = "visible";
             document.getElementById("combineSong").style.visibility = "visible";
-            document.getElementById("combinedDownload").style.visibility = "visible";
             
         },
 
@@ -140,7 +139,6 @@ function showAudioBySelectedSong(selectedSong) {
             document.getElementById("pauseResume").style.visibility = "visible";
             document.getElementById("syncAudio").style.visibility = "visible";
             document.getElementById("combineSong").style.visibility = "visible";
-            document.getElementById("combinedDownload").style.visibility = "visible";
 
         },
 
