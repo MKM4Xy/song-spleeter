@@ -10,7 +10,7 @@ def downloadAudio(title, directory="songs"):
                 print("Downloading audio: " + title)
 
                 yt = YouTube(title)
-                song_title = yt.title.replace(" ", "_").replace(".", "_")
+                song_title = yt.title.replace(" ", "_").replace(".", "_").replace("/", "")
                 stream = yt.streams.filter(only_audio=True).first()
                 stream.download(output_path=directory, filename=f"{song_title}.mp3")
 
@@ -30,7 +30,7 @@ def downloadAudio(title, directory="songs"):
 
             yt = YouTube(url)
             stream = yt.streams.filter(only_audio=True).first()
-            song_title = yt.title.replace(" ", "_").replace(".", "_")
+            song_title = yt.title.replace(" ", "_").replace(".", "_").replace("/", "")
 
             stream.download(output_path=directory, filename= song_title + ".mp3")
 

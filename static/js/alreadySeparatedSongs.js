@@ -35,10 +35,16 @@ function putAudioInOption(songName){
 
 dropMenu.addEventListener("change", function(){
     var selectedSong = dropMenu.options[dropMenu.selectedIndex].text;
-    console.log(selectedSong);
     if(selectedSong != "Select already separated songs"){
         showAudioBySelectedSong(selectedSong);
     
     }
     
 });
+
+
+
+
+
+/* ffmpeg -i "1.mp3" -i "2.mp3" -filter_complex "[1:a]adelay=10000|10000[a2]; [0:a][a2]amix=inputs=2:duration=longest[out]" -map "[out]" "done.mp3" -y
+ */

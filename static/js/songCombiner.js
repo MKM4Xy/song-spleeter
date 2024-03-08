@@ -46,15 +46,14 @@ function combineSong() {
 
 function combineUserSongs(){
     var selectedFiles = new FormData();
-    var fileInput = document.getElementById("uploadUser1");
-    selectedFiles.append('audio1', fileInput.files[0]);
-    var fileInput = document.getElementById("uploadUser2");
-    selectedFiles.append('audio2', fileInput.files[0]);
-    var fileInput = document.getElementById("uploadUser3");
-    selectedFiles.append('audio3', fileInput.files[0]);
-    var fileInput = document.getElementById("uploadUser4");
-    selectedFiles.append('audio4', fileInput.files[0]);
+    var audiosNames = ["uploadUser1", "uploadUser2", "uploadUser3", "uploadUser4"];
 
+    for(var i = 0; i < 4; i++){
+        var file = document.getElementById(audiosNames[i]).files[0];
+        if(file != undefined || file != null){
+            selectedFiles.append("audios", file);
+        }
+    }
 
     $.ajax({
         url: '/combineSongFromUpload',

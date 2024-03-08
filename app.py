@@ -1,9 +1,8 @@
-import json
 import os
 from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
-from typing import Optional
+from typing import List
 import spleeter, audioManager, youtubeDownloader, likeComparison, separatedSongList, audioCombiner
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
@@ -87,25 +86,26 @@ async def combineSong(request : Request):
     return audioCombiner.combineAudio(songName, volumes, COMBINED_DIR, OUTPUT_DIR)
 
 @app.post('/combineSongFromUpload')
-async def combineSong(audio1: UploadFile = File(...), audio2: UploadFile = File(...), audio3: UploadFile = File(...), audio4: UploadFile = File(...)):
-
-    audio1_content = await audio1.read()
-    audio2_content = await audio2.read()
-    audio3_content = await audio3.read()
-    audio4_content = await audio4.read()
+#audio1: UploadFile = File(...), audio2: UploadFile = File(...), audio3: UploadFile = File(...), audio4: UploadFile = File(...)
+async def combineSong(audios: List[UploadFile] = File(...)):
+    if len(audios) < 2:
+        return JSONResponse(status_code=400, content={"error": "Not enough audio files"})
     
-    with open(os.path.join(UPLOAD_DIR, "audio1.mp3"), "wb") as f:
-        f.write(audio1_content)
-    with open(os.path.join(UPLOAD_DIR, "audio2.mp3"), "wb") as f:
-        f.write(audio2_content)
-    with open(os.path.join(UPLOAD_DIR, "audio3.mp3"), "wb") as f:
-        f.write(audio3_content)
-    with open(os.path.join(UPLOAD_DIR, "audio4.mp3"), "wb") as f:
-        f.write(audio4_content)
+    audiosNames = ["audio1", "audio2", "audio3", "audio4"]
+    audioContents = []
+    audioIndex = 0
+    succesfullyWrittenAudios = []
+    
+    for audio in audios:
+        audioContents.append(await audio.read())
 
-    audios = ["audio1", "audio2", "audio3", "audio4"]
+    for audio in audioContents:
+        with open(os.path.join(UPLOAD_DIR, audiosNames[audioIndex] + ".mp3"), "wb") as f:
+            f.write(audio)
+            succesfullyWrittenAudios.append(audiosNames[audioIndex])
+            audioIndex += 1
 
-    return audioCombiner.combineAudioFromUpload(audios, COMBINED_UPLOAD_DIR, UPLOAD_DIR)
+    return audioCombiner.combineAudioFromUpload(succesfullyWrittenAudios, COMBINED_UPLOAD_DIR, UPLOAD_DIR)
 
 
 @app.get('/getCombinedAudio')

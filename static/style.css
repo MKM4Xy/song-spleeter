@@ -83,7 +83,7 @@ body{
     width: 40%;
     margin-top: 0px;
     height: 40px;
-
+    margin-left: 65px;
 }
 
 #alreadySeparatedSongsDiv{
@@ -91,7 +91,7 @@ body{
     display: flex;
     width: 40%;
     margin-top: 0px;
-    margin-left: 450px;
+    margin-left: 515px;
     height: 15%;
 }
 
@@ -99,7 +99,7 @@ body{
     position: absolute;
     width: 650px;
     margin-top: -43px;
-    margin-left: 750px;
+    margin-left: 815px;
     height: 15%;
 
 }
